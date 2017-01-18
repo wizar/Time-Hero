@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat'),
+	runElectron = require("gulp-run-electron");
 
 gulp.task('js:build', function () {
 	gulp.src('src/js/*.js')
@@ -26,4 +27,14 @@ gulp.task('build', [
 	'html:build'
 ]);
 
-gulp.task('default', ['build']);
+gulp.task('watch', function () {
+	gulp.watch('src/js/**/*.js', ['js:build']);
+	// gulp.watch('src/js/**/*.js', ['js:build', runElectron.rerun]);
+});
+
+gulp.task('run-electron', function () {
+	gulp.src('.')
+		.pipe(runElectron());
+});
+
+gulp.task('default', ['watch', 'build', 'run-electron']);
