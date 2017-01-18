@@ -2,12 +2,13 @@
   "name": "Time-Hero",
   "version": "0.0.0",
   "description": "",
-  "main": "src/main.js",
+  "main": "build/main.js",
   "scripts": {
     "start": "electron ."
   },
   "author": "Iskander Khalikov",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "gulp": "^3.9.1"
   }
 }
