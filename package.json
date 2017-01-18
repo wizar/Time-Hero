@@ -1,5 +1,5 @@
 {
-  "name": "Time-Hero",
+  "name": "time-hero",
   "version": "0.0.0",
   "description": "",
   "main": "build/main.js",
@@ -10,5 +10,20 @@
   "devDependencies": {
     "electron": "^1.4.1",
     "gulp": "^3.9.1"
-  }
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-run-electron": "^3.0.1",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizar/Time-Hero.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wizar/Time-Hero/issues"
+  },
+  "homepage": "https://github.com/wizar/Time-Hero#readme"
 }
