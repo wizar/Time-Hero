@@ -39,6 +39,10 @@ function watch() {
 };
 
 gulp.task('js:build', function () {
+	// Don't do anythings with background files, just copy
+	gulp.src('src/js/background/*.js')
+		.pipe(gulp.dest('build'));
+
 	return compile();
 });
 
