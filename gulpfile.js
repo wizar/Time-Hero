@@ -2,19 +2,43 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
-	runElectron = require("gulp-run-electron");
+	runElectron = require("gulp-run-electron"),
+	browserify = require('browserify'),
+	watchify = require('watchify'),
+	babel = require('babelify'),
+	source = require('vinyl-source-stream'),
+	buffer = require('vinyl-buffer');
+
+function compile(watch) {
+	var bundler = watchify(browserify('./src/js/renderer.js', { debug: true }).transform(babel));
+
+	function rebundle() {
+		bundler.bundle()
+			.on('error', function(err) { console.error(err); this.emit('end'); })
+			.pipe(source('app.js'))
+			.pipe(buffer())
+			.pipe(sourcemaps.init({ loadMaps: true }))
+			.pipe(uglify())
+			.pipe(sourcemaps.write())
+			.pipe(gulp.dest('./build'));
+	}
+
+	if (watch) {
+		bundler.on('update', function() {
+			console.log('-> bundling...');
+			rebundle();
+		});
+	}
+
+	rebundle();
+}
+
+function watch() {
+	return compile(true);
+};
 
 gulp.task('js:build', function () {
-	gulp.src('src/js/*.js')
-		.pipe(sourcemaps.init())
-		.pipe(concat('app.js'))
-		.pipe(uglify())
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('build'));
-
-	// Don't do anythings with background files, just copy
-	gulp.src('src/js/background/*.js')
-		.pipe(gulp.dest('build'));
+	return compile();
 });
 
 gulp.task('html:build', function () {
@@ -28,8 +52,9 @@ gulp.task('build', [
 ]);
 
 gulp.task('watch', function () {
-	gulp.watch('src/js/**/*.js', ['js:build']);
+	// gulp.watch('src/js/**/*.js', ['js:build']);
 	// gulp.watch('src/js/**/*.js', ['js:build', runElectron.rerun]);
+	return watch();
 });
 
 gulp.task('run-electron', function () {
