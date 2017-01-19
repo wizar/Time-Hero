@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 	watchify = require('watchify'),
 	babel = require('babelify'),
 	source = require('vinyl-source-stream'),
-	buffer = require('vinyl-buffer');
+	buffer = require('vinyl-buffer'),
+	mocha = require('gulp-mocha');
 
 function compile(watch) {
 	var bundler = watchify(browserify('./src/js/renderer.js', { debug: true }).transform(babel));
@@ -60,6 +61,11 @@ gulp.task('watch', function () {
 gulp.task('run-electron', function () {
 	gulp.src('.')
 		.pipe(runElectron());
+});
+
+gulp.task('test', function() {
+	gulp.src('./test/test.js', {read: false})
+		.pipe(mocha());
 });
 
 gulp.task('default', ['watch', 'build', 'run-electron']);
