@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb'; // Already have pouchdb-browser. Should use pouchdb and separate adapters
+import PouchDB from 'pouchdb';
 import memdown from 'memdown';
 import DBHelper from '../src/js/db-helper';
 import assert from 'assert';
