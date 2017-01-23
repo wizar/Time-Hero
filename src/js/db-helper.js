@@ -1,8 +1,8 @@
 import PouchDB from 'pouchdb-browser';
 
 class DBHelper {
-	constructor() {
-		this.db = new PouchDB('time-hero-db');
+	constructor(pouchDB) {
+		this.db = pouchDB || new PouchDB('time-hero-db');
 	}
 }
 

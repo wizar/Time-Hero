@@ -1,6 +1,10 @@
-var Application = require('spectron').Application;
-var electron = require('electron');
-var assert = require('assert');
+// var Application = require('spectron').Application;
+// var electron = require('electron');
+// var assert = require('assert');
+
+import {Application} from 'spectron';
+import electron from 'electron';
+import assert from 'assert';
 
 describe('application launch', function () {
 	this.timeout(10000)

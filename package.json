@@ -4,7 +4,8 @@
   "description": "",
   "main": "build/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "gulp",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill"
   },
   "author": "Iskander Khalikov",
   "devDependencies": {
@@ -14,6 +15,7 @@
     "electron": "^1.4.15",
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
+    "pouchdb": "^6.1.1",
     "spectron": "^3.4.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
@@ -25,6 +27,7 @@
     "gulp-run-electron": "^3.0.1",
     "gulp-sourcemaps": "^2.4.0",
     "gulp-uglify": "^2.0.0",
+    "memdown": "^1.2.4",
     "pouchdb-browser": "^6.1.1"
   },
   "repository": {
