@@ -5,10 +5,12 @@
   "main": "build/main.js",
   "scripts": {
     "start": "gulp",
-    "test": "mocha --compilers js:babel-register --require babel-polyfill"
+    "test": "electron-mocha --compilers js:babel-core/register"
   },
   "author": "Iskander Khalikov",
   "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^13.3.0",
