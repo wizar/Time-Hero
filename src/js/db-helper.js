@@ -10,6 +10,7 @@ class DBHelper {
 
 	loadDefault(path = './time-hero.txt') {
 		var db = this.db;
+		// This code needs refactoring. Really.
 		return db.get('_local/preloaded').then(function(doc) {
 			}).catch(function(err) {
 				if (err.name !== 'not_found') {
@@ -27,4 +28,4 @@ class DBHelper {
 	}
 }
 
-export default DBHelper;
+export let dbHelper = new DBHelper();
