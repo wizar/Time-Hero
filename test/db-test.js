@@ -1,7 +1,6 @@
-import PouchDB from 'pouchdb';
-import memdown from 'memdown';
 import {dbHelper} from '../src/js/db-helper';
 import assert from 'assert';
+import should from 'should';
 
 describe('Database helper', function() {
 
@@ -11,10 +10,10 @@ describe('Database helper', function() {
 	});
 
 	it('load prebuilt DB', function() {
-		dbHelper.loadDefault('other/time-hero.txt').then(function() {
+		return dbHelper.loadDefault('src/other/time-hero.txt').then(function() {
 			return dbHelper.getById('preferences');
 		}).then(function(res) {
-			assert.equal(res.username, 'Best1 Hero')
+			res.should.be.an.Object().and.have.property('username').which.equal('Best Hero');
 		});
 	});
 
