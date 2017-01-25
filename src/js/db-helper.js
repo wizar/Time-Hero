@@ -1,5 +1,6 @@
-import PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb-browser';
 import PouchDBLoad from 'pouchdb-load';
+import fs from 'fs';
 
 PouchDB.plugin(PouchDBLoad);
 
@@ -17,7 +18,10 @@ class DBHelper {
 					throw err;
 				}
 
-				return db.load(path).then(function() {
+				// Cannot figure out how to make right URI for test
+				var dump = '' + fs.readFileSync(path);
+
+				return db.load(dump).then(function() {
 					return db.put({_id: '_local/preloaded'});
 				});
 			});
