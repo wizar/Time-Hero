@@ -30,6 +30,10 @@ class DBHelper {
 	getById(id) {
 		return this.db.get(id);
 	}
+
+	update(doc) {
+		return this.db.put(doc);
+	}
 }
 
 export let dbHelper = new DBHelper();
