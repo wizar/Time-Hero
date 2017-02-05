@@ -36,7 +36,10 @@ class DBHelper {
 	}
 
 	destroy() {
-		return this.db.destroy();
+		return this.db.destroy().then((res) => {
+			this.db = new PouchDB('time-hero-db');
+			return res; // Should be there some more good way?
+		});
 	}
 }
 
