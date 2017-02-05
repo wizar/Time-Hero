@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 	watchify = require('watchify'),
 	babel = require('babelify'),
 	source = require('vinyl-source-stream'),
-	buffer = require('vinyl-buffer');
+	buffer = require('vinyl-buffer'),
+	electronMocha = require('gulp-electron-mocha').default;
 
 function compile(watch) {
 	var bundler = watchify(browserify('./src/js/renderer.js', { debug: true }).transform(babel));
@@ -65,5 +66,17 @@ gulp.task('run-electron', function () {
 	gulp.src('.')
 		.pipe(runElectron());
 });
+
+gulp.task('test', function() {
+	gulp.src('./src/**/*.spec.js')
+		.pipe(electronMocha({
+			electronMocha: {
+				renderer: true,
+				compilers: 'js:babel-core/register',
+				// interactive: true
+				// 'no-timeout': true	
+			}
+		}));
+})
 
 gulp.task('default', ['watch', 'build', 'run-electron']);
