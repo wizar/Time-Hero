@@ -34,6 +34,10 @@ class DBHelper {
 	update(doc) {
 		return this.db.put(doc);
 	}
+
+	destroy() {
+		return this.db.destroy();
+	}
 }
 
 export let dbHelper = new DBHelper();

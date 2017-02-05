@@ -12,4 +12,10 @@ describe('Database helper', function() {
 		});
 	});
 
+	it('should destroy DB (for test)', function() {
+		dbHelper.destroy().then(function(res) {
+			res.should.be.an.Object().and.have.property('ok').which.should.be.true();
+		});
+	});
+
 });
