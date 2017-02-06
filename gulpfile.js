@@ -8,6 +8,7 @@ var gulp = require('gulp'),
 	babel = require('babelify'),
 	source = require('vinyl-source-stream'),
 	buffer = require('vinyl-buffer'),
+	eslint = require('gulp-eslint'),
 	electronMocha = require('gulp-electron-mocha').default;
 
 function compile(watch) {
@@ -77,6 +78,13 @@ gulp.task('test', function() {
 				// 'no-timeout': true	
 			}
 		}));
+});
+
+gulp.task('lint:js', function() {
+	gulp.src(['./src/js/**/*.js', '!./src/js/**/*.spec.js', '!node_modules/**'])
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError());
 })
 
 gulp.task('default', ['watch', 'build', 'run-electron']);
