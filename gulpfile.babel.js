@@ -32,7 +32,7 @@ function compile(watch) {
 	}
 
 	if (watch) {
-		bundler.on('update', function() {
+		bundler.on('update', () => {
 			console.log('-> bundling...');
 			rebundle();
 		});
@@ -45,7 +45,7 @@ function watch() {
 	return compile(true);
 };
 
-gulp.task('js:build', function () {
+gulp.task('js:build', () => {
 	// Don't do anythings with background files, just copy
 	gulp.src('src/js/background/*.js')
 		.pipe(gulp.dest('build'));
@@ -53,7 +53,7 @@ gulp.task('js:build', function () {
 	return compile();
 });
 
-gulp.task('html:build', function () {
+gulp.task('html:build', () => {
 	gulp.src('src/index.html')
 		.pipe(gulp.dest('build'));
 });
@@ -63,18 +63,16 @@ gulp.task('build', [
 	'html:build'
 ]);
 
-gulp.task('watch', function () {
-	// gulp.watch('src/js/**/*.js', ['js:build']);
-	// gulp.watch('src/js/**/*.js', ['js:build', runElectron.rerun]);
+gulp.task('watch', () => {
 	return watch();
 });
 
-gulp.task('run-electron', function () {
+gulp.task('run-electron', () => {
 	gulp.src('.')
 		.pipe(runElectron());
 });
 
-gulp.task('test', function() {
+gulp.task('test', () => {
 	gulp.src('./src/**/*.spec.js')
 		.pipe(electronMocha({
 			electronMocha: {
@@ -86,7 +84,7 @@ gulp.task('test', function() {
 		}));
 });
 
-gulp.task('lint:js', function() {
+gulp.task('lint:js', () => {
 	gulp.src(['./src/js/**/*.js', '!./src/js/**/*.spec.js', '!node_modules/**'])
 		.pipe(eslint({
 			fix: true
