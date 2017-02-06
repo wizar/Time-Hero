@@ -9,7 +9,13 @@ var gulp = require('gulp'),
 	source = require('vinyl-source-stream'),
 	buffer = require('vinyl-buffer'),
 	eslint = require('gulp-eslint'),
+	gulpIf = require('gulp-if'),
 	electronMocha = require('gulp-electron-mocha').default;
+
+function isFixed(file) {
+	// Has ESLint fixed the file contents?
+	return file.eslint != null && file.eslint.fixed;
+}
 
 function compile(watch) {
 	var bundler = watchify(browserify('./src/js/renderer.js', { debug: true }).transform(babel));
@@ -82,8 +88,11 @@ gulp.task('test', function() {
 
 gulp.task('lint:js', function() {
 	gulp.src(['./src/js/**/*.js', '!./src/js/**/*.spec.js', '!node_modules/**'])
-		.pipe(eslint())
+		.pipe(eslint({
+			fix: true
+		}))
 		.pipe(eslint.format())
+		.pipe(gulpIf(isFixed, gulp.dest('.')))
 		.pipe(eslint.failAfterError());
 })
 
