@@ -3,6 +3,6 @@
 // All of the Node.js APIs are available in this process.
 import DBHelper from './db-helper';
 (function () {
-	console.log('Something!');
-	new DBHelper();
-})();
+  console.log('Something!');
+  new DBHelper();
+}());

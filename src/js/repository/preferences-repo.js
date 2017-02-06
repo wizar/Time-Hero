@@ -1,17 +1,17 @@
-import {dbHelper} from '../db-helper.js';
+import { dbHelper } from '../db-helper.js';
 
 const PREFERENCES_KEY = 'preferences';
 
 class PreferencesRepo {
-	constructor() {}
+  constructor() {}
 
-	getPreferences() {
-		return dbHelper.getById('preferences');
-	}
+  getPreferences() {
+    return dbHelper.getById('preferences');
+  }
 
-	updatePreferences(preferences) {
-		return dbHelper.update(preferences);
-	}
+  updatePreferences(preferences) {
+    return dbHelper.update(preferences);
+  }
 }
 
-export let preferencesRepo = new PreferencesRepo();
+export const preferencesRepo = new PreferencesRepo();
