@@ -1,5 +1,5 @@
-import {dbHelper} from '../db-helper';
-import {preferencesRepo} from './preferences-repo.js';
+import dbHelper from '../db-helper';
+import preferencesRepo from './preferences-repo';
 import assert from 'assert';
 import should from 'should';
 

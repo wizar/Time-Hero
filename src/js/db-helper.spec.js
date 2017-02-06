@@ -1,4 +1,4 @@
-import {dbHelper} from './db-helper';
+import dbHelper from './db-helper';
 import assert from 'assert';
 import should from 'should';
 

@@ -1,4 +1,4 @@
-import {dbHelper} from '../db-helper';
+import dbHelper from '../db-helper';
 import {statsRepository} from './stats-repository';
 import should from 'should';
 

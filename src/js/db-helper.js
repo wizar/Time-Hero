@@ -11,14 +11,14 @@ class DBHelper {
 
   loadDefault(path = './time-hero.txt') {
     const db = this.db;
-		// This code needs refactoring. Really.
-    return db.get('_local/preloaded').then((doc) => {
+    // This code needs refactoring. Really.
+    return db.get('_local/preloaded').then(() => {
     }).catch((err) => {
       if (err.name !== 'not_found') {
         throw err;
       }
 
-				// Cannot figure out how to make right URI for test
+      // Cannot figure out how to make right URI for test
       const dump = `${fs.readFileSync(path)}`;
 
       return db.load(dump).then(() => db.put({ _id: '_local/preloaded' }));
@@ -41,4 +41,6 @@ class DBHelper {
   }
 }
 
-export const dbHelper = new DBHelper();
+const dbHelper = new DBHelper();
+
+export default dbHelper;

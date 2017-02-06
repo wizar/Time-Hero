@@ -1,22 +1,21 @@
-import { dbHelper } from '../db-helper.js';
+/* eslint no-param-reassign: ["error", { "props": false }]*/
+import dbHelper from '../db-helper';
 
 const STATS_KEY = 'statistics';
 
 class StatsRepo {
-  constructor() {}
-
-  getSessionsCount() {
+  static getSessionsCount() {
     return dbHelper.getById(STATS_KEY).then(res => res.sessionsCount);
   }
 
-  incrementSessionsCount(value = 1) {
+  static incrementSessionsCount(value = 1) {
     return dbHelper.getById(STATS_KEY).then((res) => {
       res.sessionsCount += value;
       return dbHelper.update(res);
     });
   }
 
-  decrementSessionsCount(value = 1) {
+  static decrementSessionsCount(value = 1) {
     return dbHelper.getById(STATS_KEY).then((res) => {
       res.sessionsCount -= value;
       return dbHelper.update(res);
@@ -24,4 +23,6 @@ class StatsRepo {
   }
 }
 
-export const statsRepository = new StatsRepo();
+const statsRepository = new StatsRepo();
+
+export default statsRepository;
