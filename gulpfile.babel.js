@@ -11,9 +11,11 @@ import eslint from 'gulp-eslint';
 import gulpIf from 'gulp-if';
 import electronMocha from 'gulp-electron-mocha';
 
+const autoFix = false; // TODO: make this with args!
+
 function isFixed(file) {
   // Has ESLint fixed the file contents?
-  return file.eslint != null && file.eslint.fixed;
+  return autoFix && file.eslint != null && file.eslint.fixed;
 }
 
 function compile(doWatch) {
@@ -85,7 +87,7 @@ gulp.task('test', () => {
 gulp.task('lint:js', () => {
   gulp.src(['./src/js/**/*.js', '!./src/js/**/*.spec.js', '!node_modules/**'])
     .pipe(eslint({
-      fix: true,
+      fix: autoFix,
     }))
     .pipe(eslint.format())
     .pipe(gulpIf(isFixed, gulp.dest('./src/js')))
@@ -95,11 +97,13 @@ gulp.task('lint:js', () => {
 gulp.task('lint:gulp', () => {
   gulp.src('./gulpfile.babel.js')
     .pipe(eslint({
-      fix: true,
+      fix: autoFix,
     }))
     .pipe(eslint.format())
     .pipe(gulpIf(isFixed, gulp.dest('./')))
     .pipe(eslint.failAfterError());
 });
+
+gulp.task('lint', ['lint:js', 'lint:gulp']);
 
 gulp.task('default', ['watch', 'build', 'run-electron']);
