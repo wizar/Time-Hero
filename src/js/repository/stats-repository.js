@@ -25,4 +25,5 @@ class StatsRepo {
 
 const statsRepository = new StatsRepo();
 
+export {StatsRepo};
 export default statsRepository;

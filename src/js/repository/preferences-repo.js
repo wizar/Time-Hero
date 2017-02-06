@@ -14,4 +14,5 @@ class PreferencesRepo {
 
 const preferencesRepo = new PreferencesRepo();
 
+export {PreferencesRepo}; // Maybe it's better to be default?
 export default preferencesRepo;

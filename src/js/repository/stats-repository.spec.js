@@ -1,5 +1,5 @@
 import dbHelper from '../db-helper';
-import {statsRepository} from './stats-repository';
+import {StatsRepo} from './stats-repository';
 import should from 'should';
 
 beforeEach(function() {
@@ -13,24 +13,24 @@ afterEach(function() {
 describe('Statistics repo', function() {
 
 	it('should return sessions count', function() {
-		return statsRepository.getSessionsCount().then(function(res) {
+		return StatsRepo.getSessionsCount().then(function(res) {
 			return res.should.be.equal(0);
 		});
 	});
 
 	it('should increment sessions count', function() {
-		return statsRepository.incrementSessionsCount().then(function() {
-			return statsRepository.getSessionsCount();
+		return StatsRepo.incrementSessionsCount().then(function() {
+			return StatsRepo.getSessionsCount();
 		}).then(function(res) {
 			return res.should.be.equal(1);
 		});
 	});
 
 	it('should decrement sessions count', function() {
-		return statsRepository.incrementSessionsCount(3).then(function() {
-			return statsRepository.decrementSessionsCount();
+		return StatsRepo.incrementSessionsCount(3).then(function() {
+			return StatsRepo.decrementSessionsCount();
 		}).then(function() {
-			return statsRepository.getSessionsCount();
+			return StatsRepo.getSessionsCount();
 		}).then(function(res) {
 			return res.should.be.equal(2);
 		});
