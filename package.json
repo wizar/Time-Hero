@@ -4,7 +4,9 @@
   "description": "",
   "main": "build/main.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "precommit": "gulp lint",
+    "prepush": "gulp lint && gulp test"
   },
   "author": "Iskander Khalikov",
   "devDependencies": {
@@ -17,6 +19,7 @@
     "gulp-electron-mocha": "^1.3.0",
     "gulp-if": "^2.0.2",
     "gulp-mocha": "^3.0.1",
+    "husky": "^0.13.1",
     "should": "^11.1.2",
     "spectron": "^3.4.1",
     "vinyl-buffer": "^1.0.0",
