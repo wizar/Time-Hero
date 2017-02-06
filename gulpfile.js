@@ -92,7 +92,7 @@ gulp.task('lint:js', function() {
 			fix: true
 		}))
 		.pipe(eslint.format())
-		.pipe(gulpIf(isFixed, gulp.dest('.')))
+		.pipe(gulpIf(isFixed, gulp.dest('./src/js')))
 		.pipe(eslint.failAfterError());
 })
 
