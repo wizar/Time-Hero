@@ -27,7 +27,7 @@
     "watchify": "^3.8.0"
   },
   "dependencies": {
-    "electron": "^1.4.15",
+    "electron": "^9.1.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^3.0.1",
